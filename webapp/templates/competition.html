@@ -1,0 +1,26 @@
+<%inherit file="_base.html"/>
+
+<%block name="main">
+
+    <h1>${competition['title']}</h1>
+	<h2>${competition['date'].strftime('%d.%m.%Y')}</h2>
+
+	<table id="shooters">
+		<thead>
+            <tr>
+                <td class="c1">#</td>
+                <td class="c2">Shooter</td>
+				<td class="c3">Result</td>
+            </tr>
+        </thead>
+		<tbody>
+			% for shooter in shooters:
+				<tr data-shooter_id="${shooter['shooter_id']}">
+					<td class="c1">${loop.index + 1}</td>
+                	<td class="c2">${shooter['name']}</td>
+					<td class="c3">${"%.2f" % shooter['points']}</td>
+				</tr>
+			% endfor
+		</tbody>
+	</table>
+</%block>

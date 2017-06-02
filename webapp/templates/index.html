@@ -1,0 +1,27 @@
+<%inherit file="_base.html"/>
+
+<%block name="main">
+	<h1>Rating of ${calc_date.strftime('%d.%m.%Y')}</h1>
+    <table id="rating">
+        <thead>
+            <tr>
+                <td class="c1">#</td>
+                <td class="c2">Shooter</td>
+				<td class="c6">Matches</td>
+                <td class="c4">Rating</td>
+                <td class="c5">Gain</td>
+            </tr>
+        </thead>
+        <tbody>
+        % for shooter in shooters:
+            <tr data-shooter_id="${shooter['shooter_id']}">
+                <td class="c1">${loop.index + 1}</td>
+                <td class="c2">${shooter['name']}</td>
+				<td class="c5">${shooter['competitions_count']}</td>
+                <td class="c3">${"%.2f%%" % shooter['rating_percents']}</td>
+                <td class="c4">${"%.2f%%" % shooter['rating_percents_delta'] if shooter['rating_percents_delta'] < 0 else "+%.2f%%" % shooter['rating_percents_delta']}</td>
+            </tr>
+        % endfor
+        </tbody>
+    </table>
+</%block>

@@ -1,0 +1,99 @@
+* { margin:0; padding:0; border-collapse:collapse; }
+
+body {
+    background:white url('http://theobject.ru/img/bg-border.png') top left repeat-x;
+    color:black;
+    margin-top:50px;
+    font-family: 'PT Mono', monospace;
+}
+
+#main {
+    margin:0 auto 50px auto;
+}
+
+#nav { text-align:center }
+#nav a, #nav span { font-size:12px; padding:10px 8px; border-radius:8px; text-transform:uppercase; }
+#nav a { text-decoration:none; color:#fff; background:#c00; }
+#nav span { color:#fff; background:#ccc; }
+
+h1 {
+	margin:30px 0;
+    text-align:left;
+    font-size:36px;
+    text-align:center;
+    font-weight:normal;
+}
+
+h2 {
+	margin:30px 0;
+    text-align:left;
+    font-size:28px;
+    text-align:center;
+    font-weight:normal;
+}
+
+p {
+	margin:15px 0;
+	text-align:center;
+}
+
+table {
+    margin:0 auto;
+}
+
+#rating td,
+#shooters td,
+#competitions td {
+    text-align:right;
+    padding:10px 15px 10px 0;
+    font-size:13px;
+}
+
+#rating thead td,
+#shooters thead td,
+#competitions thead td {
+    background:#eee;
+    text-align:left;
+    font-weight:bold;
+}
+
+#rating tbody td,
+#shooters tbody td,
+#competitions tbody td {
+    border-top:1px solid #ddd;
+}
+
+#rating tbody td,
+#shooters tbody td,
+#competitions tbody td {
+	cursor:pointer;
+}
+
+#rating thead td:first-child,
+#shooters thead td:first-child,
+#competitions thead td:first-child {
+	padding-left:15px;
+}
+
+#rating tbody td:first-child,
+#shooters tbody td:first-child,
+#competitions tbody td:first-child {
+	text-align:left;
+	padding-left:15px;
+}
+
+#rating td.c2,
+#shooters td.c2,
+#competitions td.c2 {
+	text-align:left;
+}
+
+#rating tbody tr:hover td,
+#shooters tbody tr:hover td,
+#competitions tbody tr:hover td
+{
+	color:#c00; background:#eee;
+}
+
+tr.gray td { color:#999; }
+

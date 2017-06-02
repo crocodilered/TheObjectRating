@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TheObject Rating</title>
+        <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/global.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script src="/static/js/global.js"></script>
+   </head>
+   <body>
+
+   		<div id="nav">
+			% if path and path == 'shooters':
+				<span>Shooters</span>
+			% else:
+				<a href="/">Shooters</a>
+			% endif
+			% if path and path == 'statistics':
+				<span>Statistics</span>
+			% else:
+				<a href="/statistics/">Statistics</a>
+			% endif
+			<a href="//theobject.ru/">theobject.ru</a>
+		</div>
+        <div id="main">
+            <%block name="main"/>
+        </div>
+   </body>
+</html>

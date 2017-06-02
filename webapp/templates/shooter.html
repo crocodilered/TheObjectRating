@@ -1,0 +1,36 @@
+<%inherit file="_base.html"/>
+
+<%block name="main">
+
+    <h1>${shooter['name']}</h1>
+	<h2>Rating is ${"%.2f" % shooter['rating_percents']}%</h2>
+	<p>Spent ${shooter['competitions_count']} of ${len(competitions)} matches:</p>
+
+	<table id="competitions">
+		<thead>
+            <tr>
+                <td class="c1">#</td>
+                <td class="c2">Match</td>
+				<td class="c3">Date</td>
+                <td class="c4">Rating</td>
+				<td class="c5">Gain</td>
+            </tr>
+        </thead>
+		<tbody>
+		% for competition in competitions:
+			<tr
+				% if not competition['points']:
+					class="gray"
+				%endif
+				data-competition_id="${competition['competition_id']}"
+			>
+                <td class="c1">${loop.index + 1}</td>
+                <td class="c2">${competition['title']}</td>
+				<td class="c3">${competition['date'].strftime('%d.%m.%Y')}</td>
+				<td class="c4">${"%.2f%%" % competition['rating_percents']}</td>
+				<td class="c5">${"%.2f%%" % competition['gain'] if competition['gain'] < 0 else "+%.2f%%" % competition['gain']}</td>
+            </tr>
+		% endfor
+		</tbody>
+	</table>
+</%block>

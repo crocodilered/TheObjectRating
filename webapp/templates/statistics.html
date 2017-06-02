@@ -1,0 +1,121 @@
+<%inherit file="_base.html"/>
+
+<%block name="main">
+
+    <h1>Statistics</h1>
+
+	<div style="width:97%; margin:0 auto;">
+		<div id="competitions"></div>
+		<div id="shooters"></div>
+	</div>
+
+	<script>
+Highcharts.chart('competitions', {
+    chart: {type: 'column'},
+    title: {
+		text: '${len(competitions)} matches',
+		style: {fontSize: '28px', fontFamily: '\'PT Mono\', monospace'}
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+			style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+        	text: 'Shooters count',
+        	style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        },
+        labels: {
+			style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        }
+    },
+    legend: {enabled: false},
+    tooltip: {pointFormat: 'Shooters: <b>{point.y}</b>'},
+    series: [{
+    	color: 'rgba(204,0,0,1)',
+        name: 'Shooters',
+        data: [
+        	% for competition in competitions:
+            	['${competition['title']}, ${competition['date'].strftime('%b.%Y')}', ${competition['shooters_count']}],
+            % endfor
+        ],
+        dataLabels: {
+            enabled: true,
+            align: 'right',
+            format: '{point.y}', // one decimal
+            style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        }
+    }]
+});
+
+Highcharts.chart('shooters', {
+    chart: {
+        type: 'scatter',
+        zoomType: 'xy'
+    },
+    title: {
+    	text: '${len(shooters)} shooters',
+    	style: {fontSize: '28px', fontFamily: '\'PT Mono\', monospace'}
+    },
+    xAxis: {
+    	min: 0,
+    	max:100,
+        title: {
+            enabled: true,
+            text: 'Rating'
+        },
+        startOnTick: true,
+        endOnTick: true,
+        showLastLabel: true,
+        labels: {
+			style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        }
+    },
+    yAxis: {
+    	min: 0,
+    	max:${len(competitions)},
+        title: {text: 'Matches'},
+        labels: {
+			style: {fontSize: '12px', fontFamily: '\'PT Mono\', monospace'}
+        }
+    },
+    legend: {enabled: false},
+    plotOptions: {
+        scatter: {
+            marker: {
+            	symbol: 'circle',
+                radius: 5,
+                states: {
+                    hover: {
+                        enabled: true,
+                        lineColor: 'rgb(100,100,100)'
+                    }
+                }
+            },
+            states: {
+                hover: {
+                    marker: {enabled: false}
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: 'Rating is {point.x}%, {point.y} matches.'
+            }
+        }
+    },
+    series: [
+    	% for shooter in shooters:
+			{
+				color: 'rgba(204, 0, 0, .5)',
+				name: '${shooter['name']}',
+				data: [[${"%.2f" % shooter['rating_percents']}, ${shooter['competitions_count']}]]
+			},
+    	% endfor
+    ]
+});
+	</script>
+
+</%block>
