@@ -1,4 +1,4 @@
-import datetime
+__all__ = ['DatabaseHelper']
 
 
 class DatabaseHelper:
@@ -7,8 +7,8 @@ class DatabaseHelper:
 
     def load_points(self, competition_id=0):
         """
-        Get point for the competition
-        :param competition_id: ID of competition
+        Загрузка количества очков стрелков в соревновании
+        :param competition_id: ID соревнования
         :return: dict of dicts {value}
         """
         r = {}
@@ -21,7 +21,7 @@ class DatabaseHelper:
 
     def load_shooters(self):
         """
-        Эти данные используются при калькуляции рейтинга
+        Загрузка списка стрелков
         :return:
         """
         r = []
@@ -47,6 +47,10 @@ class DatabaseHelper:
         return r
 
     def load_shooters_with_rating(self):
+        """
+        Загрузка информации о стрелке, включая рейтинг
+        :return:
+        """
         r = []
         sql = """
             SELECT
@@ -78,6 +82,11 @@ class DatabaseHelper:
         return r
 
     def load_shooter(self, shooter_id):
+        """
+        Загрузка информации о стрелке
+        :param shooter_id:
+        :return:
+        """
         r = {}
         sql = """
             SELECT
@@ -103,6 +112,11 @@ class DatabaseHelper:
         return r
 
     def load_shooter_competitions(self, shooter_id):
+        """
+        Загрузка соревнований, в которых принимал участие стрелок
+        :param shooter_id:
+        :return:
+        """
         r = []
         sql = """
             SELECT
@@ -133,6 +147,11 @@ class DatabaseHelper:
         return r
 
     def load_competition(self, competition_id):
+        """
+        Загрузка информации о соревновании
+        :param competition_id:
+        :return:
+        """
         r = {}
         sql = """
             SELECT competition_id, title, dt
@@ -146,6 +165,11 @@ class DatabaseHelper:
         return r
 
     def load_competition_shooters(self, competition_id):
+        """
+        Загрузка стрелков, выступавших на соревновании
+        :param competition_id:
+        :return:
+        """
         r = []
         sql = """
             SELECT
@@ -195,9 +219,19 @@ class DatabaseHelper:
         return r
 
     def clear_competition_rating(self):
+        """
+        Обнуление рейтингов
+        :return:
+        """
         self._session.execute("DELETE FROM ratings")
 
     def put_competition_rating(self, competition_id, shooters):
+        """
+        Сохранение рейтингов
+        :param competition_id:
+        :param shooters:
+        :return:
+        """
         sql = "INSERT INTO ratings (competition_id, shooter_id, value_abs, value_percents) VALUES "
         for shooter in shooters:
             sql += "(%s, %s, %s, %s)," % (competition_id,
